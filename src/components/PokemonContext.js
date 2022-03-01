@@ -3,13 +3,18 @@ import React, { createContext, useState } from 'react';
 const PokemonContext = createContext();
 
 const PokemonProvider = (props) => {
-  const [pokemons, setPokemons] = useState([
-    { id: 1, name: 'Bulbasaur' },
-    { id: 2, name: 'Charmander' },
-    { id: 3, name: 'Squirtle' }
-  ]);
+  const defaultState = {
+    pokemons: [
+      { id: 1, name: 'Bulbasaur' },
+      { id: 2, name: 'Charmander' },
+      { id: 3, name: 'Squirtle' }
+    ],
+    capturedPokemons: []
+  };
 
-  const [capturedPokemons, setCapturedPokemons] = useState([]);
+  const [state, dispatch] = useReducer(pokemonReducer, defaultState);
+
+  // const [capturedPokemons, setCapturedPokemons] = useState([]);
 
   const providerValue = {
     pokemons,
